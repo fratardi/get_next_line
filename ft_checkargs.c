@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 19:22:13 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/06 19:17:00 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:24:02 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,8 @@ int		ft_checkargs(int argc)
 		ft_putendl("Too many arguments.");
 		return(0);
 	}
+
+
+
 	return(1);
 }

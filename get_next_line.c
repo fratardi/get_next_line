@@ -6,47 +6,55 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/07 21:08:03 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/12 07:14:38 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 
-
-void	bufnpos(void)
+//le liner met le conenu du rest sans le \n dans une string
+char *liner(char *rest)
 {
-	return;		
+	size_t i;
+
+	i = 0;
+	while(rest[i] != '\n' && rest[i] != '\0')
+		i++;
+	return(ft_strndup(rest, i));
+}
+
+//apres l'avoir clear rentre dans rst le restant du buffer apres le \n 
+char *buffrest(char *str)
+{
+	char *rest;
+	rest = ft_strdup(ft_strchr(str, '\n') + 1);
+	free(str);
+	return(rest);
 }
 
 int		get_next_line(const int fd, char **line)
 {
 	static char *rst;
 	char buf[BUFF_SIZE + 1];
-	int i;
 
 	ft_bzero(buf, BUFF_SIZE + 1);
-	i = 0;
-	if(!fd || !line)
-		return(-1);
-	while(read(fd, buf, BUFF_SIZE))
-	{
-	//	i = 0;
-	//	while(buf[i] != ('\n' || '\0'))
-	//			i++;
-	//	if(buf[i] == '\n')
-	//	{
-			rst =  ft_strjoin(rst, buf);
-//			*line = ft_strdup(rst);
-// a ne pas free			free(rst) ;
-//	ret++;
-	//		return(1);
-		//}
-	/*	else
-			*rst = ft_strjoin(*line, buf)*/
+	while(0 < read(fd, &buf, BUFF_SIZE))
+	{	
+		rst = ft_strjoin(rst, buf);
+		if(ft_strchr(buf, '\n'))
+		{
+			*line = liner(rst);
+			rst = buffrest(rst);
+			free (line);
+			line++;
+			return(1);
+		}
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
-	*line = ft_strdup(rst);
+	*line = liner(rst);
+	free (line);
+	line++;
 	return(0);
 }
 ///* Le premier paramètre est le file descriptor depuis lequel lire.
@@ -63,3 +71,15 @@ int		get_next_line(const int fd, char **line)
 // si mon fichier est vide 
 // si mon buffer passe sur un retour et qui'il reste des char dans le buffer 
 // si BUFFSIZE < 0 ou = 0
+//
+//
+//				
+//						  ......	
+//				[bonjour\nje suis]
+//
+//
+//
+//
+//
+//
+//
