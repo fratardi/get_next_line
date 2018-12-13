@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:08:49 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/11 18:17:36 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/13 22:40:08 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft/libft.h"
-# define BUFF_SIZE 15
+# define BUFF_SIZE 1
 
 /*typedef struct			s_list
 {

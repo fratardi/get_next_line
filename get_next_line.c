@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/12 07:14:38 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/13 22:40:50 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,32 @@
 
 
 //le liner met le conenu du rest sans le \n dans une string
-char *liner(char *rest)
+char *liner(char *linetoclear)
 {
 	size_t i;
-
+	char *ret;
+	ret = NULL;
 	i = 0;
-	while(rest[i] != '\n' && rest[i] != '\0')
+//	ft_putendl("ici");
+	while(linetoclear[i] != '\n' && linetoclear[i] != '\0')
 		i++;
-	return(ft_strndup(rest, i));
+//	ft_putendl("lol ?");
+	if(!(ret = ft_strndup(linetoclear, i)))
+		return(NULL);
+//	ft_putendl("la ? ");
+	free(linetoclear);
+	return(ret);
 }
 
 //apres l'avoir clear rentre dans rst le restant du buffer apres le \n 
 char *buffrest(char *str)
 {
 	char *rest;
+	rest = NULL;
+//	ft_putendl("trydup ");
 	rest = ft_strdup(ft_strchr(str, '\n') + 1);
-	free(str);
+//	ft_putendl("success dup");
+//	ft_putendl(str);
 	return(rest);
 }
 
@@ -37,24 +47,37 @@ int		get_next_line(const int fd, char **line)
 {
 	static char *rst;
 	char buf[BUFF_SIZE + 1];
+//	char *ret;
+	size_t n;
 
+if(	rst == NULL)
+	rst="";
 	ft_bzero(buf, BUFF_SIZE + 1);
-	while(0 < read(fd, &buf, BUFF_SIZE))
+// la boucle passe sur le buffer tant que n (la valeur retour de mon read) est superieur a zero
+	while(0 < (n = read(fd, &buf, BUFF_SIZE)))
 	{	
-		rst = ft_strjoin(rst, buf);
-		if(ft_strchr(buf, '\n'))
+//concatene a rst le buffer
+	/*	ft_putendl(*/rst = ft_strjoin(rst, buf);
+// si mon buffer contient un \n
+	if(ft_strchr(buf, '\n'))
 		{
+//			ft_putendl(rst);
+//copie dans la ligne le contenu de rst jusqu'au \n  et libere le rst precedent
 			*line = liner(rst);
-			rst = buffrest(rst);
-			free (line);
-			line++;
+//copie le reste du buffer apres le \n dans rst
+		//	ft_putendl("buffrest entree");
+			rst = buffrest(buf);
+		//	ft_putendl(rst);
+//retour correstpondant a la fin d'une ligne
 			return(1);
 		}
+// clear le buffer pour le prochain tour
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
+//applique
+//	rst = ft_strjoin(rst, buf);
+	//rst = buffrest(buf);
 	*line = liner(rst);
-	free (line);
-	line++;
 	return(0);
 }
 ///* Le premier paramètre est le file descriptor depuis lequel lire.

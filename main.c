@@ -6,7 +6,7 @@
 /*   By: fratardi <fratardi>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:50:14 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/12 06:46:10 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/13 22:38:49 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,27 @@ int		main(int argc, char **argv)
 {
 	int fd;
 	char *line[9000];
-//	char **tab;
-//	char *buf;
-//	char *rez;
 int i;
-int ret;
+int n;
 
-ret = 0;
+n = 0;
 
 i = 0;
 	if(!(ft_checkargs(argc)))
 		return(0);
 	fd = open(argv[1], O_RDONLY);
-while( 0 < get_next_line(fd, line))
-	;				
-		ft_print_table(line);
-		
+while( (n = get_next_line(fd, line) > 0))
+		{
+		ft_putnbr(n);
+		ft_putchar(' ');
+		ft_putnbr(++i);
+		ft_putchar(' ');
+//		ft_putchar('\n');
+//		ft_putendl("get next line ok");
+//		ft_putnbr(fd);i
+	//	ft_putchar('\n');
+		ft_putendl(*line);
+		}
+ft_putnbr(n);
 	return(0);
 }
