@@ -1,0 +1,7 @@
+char *str;
+char *tmp;
+
+str = ft_strdup("coucou");
+tmp = str;
+str = ft_strdup("toto");
+free (tmp);

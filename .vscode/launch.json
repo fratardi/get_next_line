@@ -4,12 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/a.out",
-            "args": ["ft_checkargs.c"],
+            "program": "${workspaceFolder}/gnl",
+            "args": ["/Users/fratardi/Testbox/42FileChecker/moulitest_42projects/get_next_line_tests/tests/01_test_simple.spec.c"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

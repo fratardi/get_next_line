@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:08:49 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/13 22:40:08 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/14 04:08:16 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # include "libft/libft.h"
 # define BUFF_SIZE 1
 
-/*typedef struct			s_list
+/*typedef struct			s_line
 {
-	void				*content;
-	size_t				content_size;
+	char 		*ligne;
+	int			fd;
 	struct		s_list 	*next;
-}						t_list;
+}						t_line;
 */
 int						get_next_line2(const int fd, char **line);
 int						get_next_line(const int fd, char **line);
