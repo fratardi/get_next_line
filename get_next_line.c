@@ -6,11 +6,35 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/14 04:38:28 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/15 21:29:20 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+
+char	*strjointorendre(char *tofree, char *buf)
+{
+	char *rez;
+	int i;
+	int j;
+
+	if(!(tofree || buf))
+		return(NULL);
+	if (tofree && !buf)
+		return (ft_strdup(tofree));
+	if (!tofree && buf)
+		return (ft_strdup(buf));
+	j = ft_strlen(buf);
+	i = ft_strlen(tofree);
+	if(!(rez =(char *)ft_memalloc(sizeof(char) * i + j + 1)))
+		return(NULL);
+	rez = ft_strcpy(rez, tofree);
+	rez = ft_strcat(rez, buf);
+	return(rez);
+}
+
+
 
 char *liner(char *linetoclear)
 {
@@ -31,8 +55,9 @@ char *buffrest(char *str)
 {
 	char *rest;
 	rest = NULL;
-	rest = ft_strdup(ft_strchr(str, '\n') + 1);
-	rest[ft_strlen(rest)] = '\0';
+	
+	rest = ft_strdup(ft_strchr(str,'\n') + 1);
+//	free(str);
 	return(rest);
 }
 
@@ -42,16 +67,14 @@ int		get_next_line(const int fd, char **line)
 	char buf[BUFF_SIZE + 1];
 	int n;
 
-	if (!rst)
-		rst = ft_strdup("");
 	ft_bzero(buf, BUFF_SIZE + 1);
-	while( (n = read(fd, &buf, BUFF_SIZE)))
-	{	
-		rst = ft_strjoin(rst, buf);
-		if(ft_strchr(buf, '\n'))
+	while( (n = read(fd, &buf, BUFF_SIZE) > 0))
+	{
+		rst = strjointorendre(rst, buf);
+		if(ft_strchr(rst, '\n'))
 		{
 			*line = liner(rst);
-				rst = buffrest(buf);
+			rst = buffrest(rst);
 			return(1);
 		}
 		ft_bzero(buf, BUFF_SIZE + 1);

@@ -6,7 +6,7 @@
 /*   By: fratardi <fratardi>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:50:14 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/14 03:53:18 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/15 21:29:23 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -35,7 +35,7 @@ int		main(int argc, char **argv)
 		//ft_putendl("get next line ok");
 		ft_putnbr(++i);
 		//	ft_putchar('\n');
-		ft_putendl(line);
+	ft_putendl(line);
 		free(line);
 	}
 	//ft_putnbr(n);
