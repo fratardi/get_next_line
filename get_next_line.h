@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:08:49 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/16 20:24:48 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/16 22:15:57 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft/libft.h"
-# define BUFF_SIZE 5
+# define BUFF_SIZE 1
 
 
 

@@ -6,13 +6,13 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/16 20:35:49 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/16 22:20:56 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*strjointorendre(char *tofree, char *buf)
+char	*strjoin(char *tofree, char *buf)
 {
 	char	*rez;
 	int		i;
@@ -30,6 +30,7 @@ char	*strjointorendre(char *tofree, char *buf)
 		return (NULL);
 	rez = ft_strcpy(rez, tofree);
 	rez = ft_strcat(rez, buf);
+	//free(tofree);
 	return (rez);
 }
 
@@ -57,6 +58,7 @@ char	*buffrest(char *str)
 		free(str);
 	else
 		rest = ft_strdup(ft_strchr(str, '\n') + 1);
+	//free(str);
 	return (rest);
 }
 
@@ -69,13 +71,15 @@ int		get_next_line(const int fd, char **line)
 	ft_bzero(buf, BUFF_SIZE + 1);
 	while ((n = read(fd, &buf, BUFF_SIZE) > 0))
 	{
-		rst = strjointorendre(rst, buf);
-		if (ft_strchr(rst, '\n'))
+		rst = strjoin(rst, buf);
+		if (ft_strchr(buf, '\n'))
 		{
+			rst = strjoin(rst, buf);
 			*line = liner(rst);
-			rst = buffrest(rst);
+			rst = buffrest(buf);
 			return (1);
 		}
+		//rst = strjoin(rst, buf);
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
 	*line = liner(rst);
