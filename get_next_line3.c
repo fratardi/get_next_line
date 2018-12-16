@@ -5,18 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/16 23:06:15 by fratardi         ###   ########.fr       */
+/*   Created: 2018/12/16 22:34:45 by fratardi          #+#    #+#             */
+/*   Updated: 2018/12/16 23:14:32 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*strjoin(char *tofree, char *buf)
+char    *strjoin(char *tofree, char *buf)
 {
-	char	*rez;
-	int		i;
-	int		j;
+	char    *rez;
+	int     i;
+	int     j;
 
 	if (!(tofree || buf))
 		return (NULL);
@@ -33,52 +33,57 @@ char	*strjoin(char *tofree, char *buf)
 	return (rez);
 }
 
-char	*liner(char *linetoclear)
+char *liner(char *str)
 {
-	size_t		i;
-	char		*ret;
+	size_t	i;
+	char 	*ret;
 
 	ret = NULL;
 	i = 0;
-	while (linetoclear[i] != '\0' && linetoclear[i] != '\n')
+	i = 0;
+	while (str[i] != '\0' && str[i] != '\n')
 		i++;
-	if (!(ret = ft_strndup(linetoclear, i)))
+	if (!(ret = ft_strndup(str, i)))
 		return (NULL);
-	free(linetoclear);
+	free(str);
 	return (ret);
 }
 
-char	*buffrest(char *str)
+char *buffrest(char *rest)
 {
-	char *rest;
+	char 	*tmp;
+	size_t 	i;
 
-	rest = NULL;
-	if (!(ft_strchr(str, '\n') + 1))
-		free(str);
-	else
-		rest = ft_strdup(ft_strchr(str, '\n') + 1);
+	if(!(tmp = ft_strchr(rest , '\n') + 1))
+		free(rest);
+	rest = ft_strdup(tmp);
 	return (rest);
 }
 
 int		get_next_line(const int fd, char **line)
 {
-	static char		*rst = NULL;
-	char			buf[BUFF_SIZE + 1];
-	int				n;
+	static char		*rest = NULL;
+	char 			buf[BUFF_SIZE + 1];
+	size_t 			n;
 
 	ft_bzero(buf, BUFF_SIZE + 1);
-	while ((n = read(fd, &buf, BUFF_SIZE) > 0))
+	if(ft_strchr(rest, '\n'))
 	{
-		rst = strjoin(rst, buf);
-		if (ft_strchr(buf, '\n'))
+		*line = liner(rest);
+		rest = buffrest(rest);
+		return(1);
+	}
+	while((0 < (n = read(fd, buf, BUFF_SIZE))))
+	{
+		rest = strjoin(rest, buf);
+		if(ft_strchr(rest, '\n'))
 		{
-//			rst = strjoin(rst, buf);
-			*line = liner(rst);
-			rst = buffrest(buf);
-			return (1);
+			*line = liner(rest);
+			rest = buffrest(rest);
+			return(1);
 		}
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
-	*line = liner(rst);
-	return (0);
+	*line = liner(rest);
+	return(0);
 }

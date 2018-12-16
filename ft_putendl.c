@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fratardi <fratardi>                        +#+  +:+       +#+        */
+/*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/05 13:41:16 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/05 13:50:16 by fratardi         ###   ########.fr       */
+/*   Created: 2018/12/16 22:28:00 by fratardi          #+#    #+#             */
+/*   Updated: 2018/12/16 22:29:39 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	ft_putendl(const char *s)
 {
 	int i;
+
 	i = 0;
-	while(s[i])
+	while (s[i])
 		write(1, &s[i++], 1);
 	write(1, "\n", 1);
 }

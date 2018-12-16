@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 19:22:13 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/13 20:39:45 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/16 22:25:45 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 
 int		ft_checkargs(int argc)
 {
-	if(argc <= 1)
+	if (argc <= 1)
 	{
 		ft_putendl("File name is missing.");
-		return(0);
+		return (0);
 	}
-	if(argc > 2)
+	if (argc > 2)
 	{
 		ft_putendl("Too many arguments.");
-		return(0);
+		return (0);
 	}
-
-
-
-	return(1);
+	return (1);
 }
