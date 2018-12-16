@@ -6,88 +6,78 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/16 18:55:06 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/16 20:35:49 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-
 char	*strjointorendre(char *tofree, char *buf)
 {
-	char *rez;
-	int i;
-	int j;
+	char	*rez;
+	int		i;
+	int		j;
 
-	if(!(tofree || buf))
-		return(NULL);
+	if (!(tofree || buf))
+		return (NULL);
 	if (tofree && !buf)
 		return (ft_strdup(tofree));
 	if (!tofree && buf)
 		return (ft_strdup(buf));
 	j = ft_strlen(buf);
 	i = ft_strlen(tofree);
-	if(!(rez =(char *)ft_memalloc(sizeof(char) * i + j + 1)))
-		return(NULL);
+	if (!(rez = (char *)ft_memalloc(sizeof(char) * i + j + 1)))
+		return (NULL);
 	rez = ft_strcpy(rez, tofree);
 	rez = ft_strcat(rez, buf);
-	return(rez);
+	return (rez);
 }
 
-
-
-char *liner(char *linetoclear)
+char	*liner(char *linetoclear)
 {
-	size_t i;
-	char *ret;
+	size_t		i;
+	char		*ret;
 
 	ret = NULL;
 	i = 0;
 	while (linetoclear[i] != '\0' && linetoclear[i] != '\n')
 		i++;
-	if(!(ret = ft_strndup(linetoclear, i)))
-		return(NULL);
+	if (!(ret = ft_strndup(linetoclear, i)))
+		return (NULL);
 	free(linetoclear);
 	return (ret);
 }
 
-char *buffrest(char *str)
+char	*buffrest(char *str)
 {
 	char *rest;
-	rest = NULL;
 
-	if(!(ft_strchr(str,'\n') + 1))
-	{
+	rest = NULL;
+	if (!(ft_strchr(str, '\n') + 1))
 		free(str);
-		return(str);
-	}
 	else
-	{
 		rest = ft_strdup(ft_strchr(str, '\n') + 1);
-//		free(str);
-	}
-	return(rest);
+	return (rest);
 }
 
 int		get_next_line(const int fd, char **line)
 {
-	static char *rst = NULL;
-	char buf[BUFF_SIZE + 1];
-	int n;
+	static char		*rst = NULL;
+	char			buf[BUFF_SIZE + 1];
+	int				n;
 
 	ft_bzero(buf, BUFF_SIZE + 1);
-	while( (n = read(fd, &buf, BUFF_SIZE) > 0))
+	while ((n = read(fd, &buf, BUFF_SIZE) > 0))
 	{
 		rst = strjointorendre(rst, buf);
-		if(ft_strchr(rst, '\n') )
+		if (ft_strchr(rst, '\n'))
 		{
 			*line = liner(rst);
 			rst = buffrest(rst);
-			return(1);
+			return (1);
 		}
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
-	*line = rst;
-	//	rst = buffrest(rst);
-	return(0);
+	*line = liner(rst);
+	return (0);
 }

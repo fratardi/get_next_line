@@ -6,7 +6,7 @@
 /*   By: fratardi <fratardi>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:50:14 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/16 18:48:01 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/16 19:46:41 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -25,7 +25,7 @@ int		main(int argc, char **argv)
 	if(!(ft_checkargs(argc)))
 		return(0);
 	fd = open(argv[1], O_RDONLY);
-	while((n = get_next_line(fd, &line) > 0))
+	while((n = get_next_line(fd, &line) > 0)/* && i < 14*/)
 	{
 //		printf("%p\n", line);
 //		printf("[%-4d] %d %-2s\n", ++i, n, line);
