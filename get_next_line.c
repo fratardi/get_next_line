@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/15 21:29:20 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/16 18:55:06 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,17 @@ char *buffrest(char *str)
 {
 	char *rest;
 	rest = NULL;
-	
-	rest = ft_strdup(ft_strchr(str,'\n') + 1);
-//	free(str);
+
+	if(!(ft_strchr(str,'\n') + 1))
+	{
+		free(str);
+		return(str);
+	}
+	else
+	{
+		rest = ft_strdup(ft_strchr(str, '\n') + 1);
+//		free(str);
+	}
 	return(rest);
 }
 
@@ -71,7 +79,7 @@ int		get_next_line(const int fd, char **line)
 	while( (n = read(fd, &buf, BUFF_SIZE) > 0))
 	{
 		rst = strjointorendre(rst, buf);
-		if(ft_strchr(rst, '\n'))
+		if(ft_strchr(rst, '\n') )
 		{
 			*line = liner(rst);
 			rst = buffrest(rst);
@@ -80,5 +88,6 @@ int		get_next_line(const int fd, char **line)
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
 	*line = rst;
+	//	rst = buffrest(rst);
 	return(0);
 }
