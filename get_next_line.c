@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/16 23:49:02 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/17 23:44:58 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,16 @@ char	*strjoin(char *tofree, char *buf)
 	if (!(tofree || buf))
 		return (NULL);
 	if (tofree && !buf)
-		return (ft_strdup(tofree));
+	{
+		rez = ft_strdup(tofree);
+		free(tofree);
+		return (rez);
+	}
 	if (!tofree && buf)
-		return (ft_strdup(buf));
+	{
+		rez = ft_strdup(buf);
+		return (rez);
+	}
 	j = ft_strlen(buf);
 	i = ft_strlen(tofree);
 	if (!(rez = (char *)ft_memalloc(sizeof(char) * i + j + 1)))
@@ -54,9 +61,17 @@ char	*buffrest(char *str)
 
 	rest = NULL;
 	if (!(ft_strchr(str, '\n') + 1))
+	{
 		free(str);
-	else
+		ft_putendl("la");
+		return(str);
+	}	
+	else if (ft_strchr(str, '\n') + 1)
+	{
+		ft_putendl("ou la dans le buffrest");
 		rest = ft_strdup(ft_strchr(str, '\n') + 1);
+		ft_putendl("ici");
+	}
 	return (rest);
 }
 
@@ -67,7 +82,6 @@ int		get_next_line(const int fd, char **line)
 	int				n;
 
 	ft_bzero(buf, BUFF_SIZE + 1);
-
 	while ((n = read(fd, &buf, BUFF_SIZE) > 0))
 	{
 		rst = strjoin(rst, buf);
@@ -79,6 +93,16 @@ int		get_next_line(const int fd, char **line)
 		}
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
+	if (ft_strchr(rst, '\n'))
+	{
+		ft_putendl("afterwhile");
+		*line = liner(rst);
+		ft_putendl("afterwhile liner");
+		rst = buffrest(rst);
+		ft_putendl("afterwhile buff");
+		return (1);
+	}
+	ft_putendl("after if pass ?");
 	*line = liner(rst);
 	return (0);
 }
