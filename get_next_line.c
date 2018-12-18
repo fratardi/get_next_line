@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/18 05:36:09 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/18 05:38:49 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,8 @@ char	*buffrest(char *str)
 		return (rest);
 	}
 	else if (ft_strchr(str, '\n'))
-	{
-		if (str)
-		{
+//		if (str)
 			rest = ft_strdup(ft_strchr(str, '\n') + 1);
-		}
-	}
 	return (rest);
 }
 
