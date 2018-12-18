@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/17 23:44:58 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/18 02:21:15 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ char	*buffrest(char *str)
 	if (!(ft_strchr(str, '\n') + 1))
 	{
 		free(str);
-		ft_putendl("la");
-		return(str);
+//		ft_putendl("la");
+		return(rest);
 	}	
-	else if (ft_strchr(str, '\n') + 1)
+	if (ft_strchr(str, '\n') + 1)
 	{
-		ft_putendl("ou la dans le buffrest");
+//		ft_putendl("ou la dans le buffrest");
 		rest = ft_strdup(ft_strchr(str, '\n') + 1);
-		ft_putendl("ici");
+//		ft_putendl("ici");
 	}
 	return (rest);
 }
@@ -81,13 +81,17 @@ int		get_next_line(const int fd, char **line)
 	char			buf[BUFF_SIZE + 1];
 	int				n;
 
+
 	ft_bzero(buf, BUFF_SIZE + 1);
 	while ((n = read(fd, &buf, BUFF_SIZE) > 0))
 	{
+		if(n < 0)
+			return(-1);
 		rst = strjoin(rst, buf);
 		if (ft_strchr(buf, '\n'))
 		{
 			*line = liner(rst);
+//			ft_putendl("apres le liner dans la boucle");
 			rst = buffrest(rst);
 			return (1);
 		}
@@ -95,14 +99,14 @@ int		get_next_line(const int fd, char **line)
 	}
 	if (ft_strchr(rst, '\n'))
 	{
-		ft_putendl("afterwhile");
+//		ft_putendl("afterwhile");
 		*line = liner(rst);
-		ft_putendl("afterwhile liner");
+//		ft_putendl("afterwhile liner");
 		rst = buffrest(rst);
-		ft_putendl("afterwhile buff");
+//		ft_putendl("afterwhile buff");
 		return (1);
 	}
-	ft_putendl("after if pass ?");
+//	ft_putendl("after if pass ?");
 	*line = liner(rst);
 	return (0);
 }
