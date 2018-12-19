@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/19 19:46:18 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/19 22:35:14 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*strjoinfree(char *tofree, char *buf)
 {
-	char	*rez;
-	int		i;
-	int		j;
+	char		*rez;
+	size_t		i;
+	size_t		j;
 
 	if (!(tofree || buf))
 		return (NULL);
@@ -33,7 +33,7 @@ char	*strjoinfree(char *tofree, char *buf)
 	}
 	j = ft_strlen(buf);
 	i = ft_strlen(tofree);
-	if (!(rez = (char *)ft_memalloc(sizeof(char) * i + j + 1)))
+	if (!(rez = (char *)malloc(sizeof(char) * i + j + 1)))
 		return (NULL);
 	rez = ft_strcpy(rez, tofree);
 	rez = ft_strcat(rez, buf);
@@ -43,8 +43,8 @@ char	*strjoinfree(char *tofree, char *buf)
 
 char	*liner(char *linetoclear)
 {
-	size_t		i;
-	char		*ret;
+	int		i;
+	char	*ret;
 
 	ret = NULL;
 	i = 0;
@@ -73,11 +73,11 @@ char	*buffrest(char *str)
 
 int		get_next_line(const int fd, char **line)
 {
-	static char		*rst = NULL;
+	static void		*rst = NULL;
 	char			buf[BUFF_SIZE + 1];
 	int				n;
 
-	ft_bzero(buf, BUFF_SIZE);
+	ft_bzero(buf, BUFF_SIZE + 1);
 	while ((n = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
 		rst = strjoinfree(rst, buf);
@@ -87,7 +87,7 @@ int		get_next_line(const int fd, char **line)
 			rst = buffrest(rst);
 			return (1);
 		}
-		ft_bzero(buf, n);
+		ft_bzero(buf, n +1);
 	}
 	if (ft_strchr(rst, '\n'))
 	{
