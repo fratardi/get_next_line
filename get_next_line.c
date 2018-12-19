@@ -6,13 +6,13 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/18 05:43:32 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/19 19:46:18 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*strjoin(char *tofree, char *buf)
+char	*strjoinfree(char *tofree, char *buf)
 {
 	char	*rez;
 	int		i;
@@ -66,10 +66,8 @@ char	*buffrest(char *str)
 		return (rest);
 	}
 	else if (ft_strchr(str, '\n'))
-/*
-** 	if (str)
-*/
 		rest = ft_strdup(ft_strchr(str, '\n') + 1);
+	free(str);
 	return (rest);
 }
 
@@ -79,17 +77,17 @@ int		get_next_line(const int fd, char **line)
 	char			buf[BUFF_SIZE + 1];
 	int				n;
 
-	ft_bzero(buf, BUFF_SIZE + 1);
+	ft_bzero(buf, BUFF_SIZE);
 	while ((n = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
-		rst = strjoin(rst, buf);
-		if (ft_strchr(buf, '\n'))
+		rst = strjoinfree(rst, buf);
+		if (ft_strchr(rst, '\n'))
 		{
 			*line = liner(rst);
 			rst = buffrest(rst);
 			return (1);
 		}
-		ft_bzero(buf, BUFF_SIZE + 1);
+		ft_bzero(buf, n);
 	}
 	if (ft_strchr(rst, '\n'))
 	{
