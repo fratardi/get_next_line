@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/19 22:54:28 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/19 22:59:23 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		get_next_line(const int fd, char **line)
 			rst = buffrest(rst);
 			return (1);
 		}
-		ft_bzero(buf, n + 1);
+		ft_bzero(buf, BUFF_SIZE + 1);
 	}
 	*line = liner(rst);
 	if ((rst = buffrest(rst)))
