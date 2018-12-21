@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/19 22:59:23 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/21 01:11:18 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*liner(char *linetoclear)
 
 char	*buffrest(char *str)
 {
-	char *rest;
+	char	*rest;
 
 	rest = NULL;
 	if (!(ft_strchr(str, '\n') + 1))
@@ -92,5 +92,6 @@ int		get_next_line(const int fd, char **line)
 	*line = liner(rst);
 	if ((rst = buffrest(rst)))
 		return (1);
+	free(rst);
 	return (0);
 }
