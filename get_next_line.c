@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/21 02:19:07 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/21 05:52:57 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	*liner(char *linetoclear)
 
 	ret = NULL;
 	i = 0;
+//	if (!linetoclear)
+//		return(NULL);
 	while (linetoclear[i] != '\0' && linetoclear[i] != '\n')
 		i++;
 	if (!(ret = ft_strndup(linetoclear, i)))
@@ -60,16 +62,20 @@ char	*buffrest(char *str)
 	char	*rest;
 
 	rest = NULL;
+	if(!str)
+		return(rest);
 	if (!(ft_strchr(str, '\n') + 1))
 	{
 		free(str);
 		return (rest);
 	}
-	if (ft_strchr(str, '\n') && ft_strchr(str, '\n') + 1)
+	if (ft_strchr(str, '\n') && (ft_strchr(str, '\n') + 1))
 		rest = ft_strdup(ft_strchr(str, '\n') + 1);
 	free(str);
 	return (rest);
 }
+
+#include <stdio.h>
 
 int		get_next_line(const int fd, char **line)
 {
@@ -78,6 +84,8 @@ int		get_next_line(const int fd, char **line)
 	size_t			n;
 
 	ft_bzero(buf, BUFF_SIZE + 1);
+	if(fd < 0)
+		return(-1);
 	while ((n = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
 		rst = strjoinfree(rst, buf);
@@ -89,10 +97,12 @@ int		get_next_line(const int fd, char **line)
 		}
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
-	rst = strjoinfree(rst, buf);
 	*line = liner(rst);
-	if ((rst = buffrest(rst)))
+	printf("line >>%p<<\tline : >>%s<<\n", line, *line);
+	if ((rst = buffrest(rst)) || *line)
 		return (1);
+	write(1, "proute ca mere\n", 14);
 	free(rst);
+	rst = NULL;
 	return (0);
 }
