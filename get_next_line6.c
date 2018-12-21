@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/21 09:23:49 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/21 07:08:28 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,33 +97,16 @@ int		get_next_line(const int fd, char **line)
 		}
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
-
-
-}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*		if(!(*line = liner(rst)))
+		if(!(*line = liner(rst)))
 		{
-			free(*line);
+			line = NULL;
 			return(0);
 		}
-//	printf("line >>%p<<\tline : >>%s<<\n", line, *line);
+	printf("line >>%p<<\tline : >>%s<<\n", line, *line);
 	if ((rst = buffrest(rst)) || *line)
 		return (1);
 //	write(1, "proute ca mere\n", 14);
 	free(rst);
 	rst = NULL;
 	return (0);
-}*/
+}
