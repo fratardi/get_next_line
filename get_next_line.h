@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:08:49 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/21 01:11:25 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/21 02:19:11 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 //reste 5 lignes 
@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# define BUFF_SIZE 1
+# define BUFF_SIZE 2
 //# define BUFF_SIZE 8381921
 int						get_next_line(const int fd, char **line);
 int						ft_checkargs(int argc);
