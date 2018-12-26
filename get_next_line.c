@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/26 07:21:28 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/26 07:40:47 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		get_next_line(const int fd, char **line)
 {
 	static void		*rst;
 	char			buf[BUFF_SIZE + 1];
-	int			n;
+	int				n;
 
 	if (fd < 0 || line == (void *)0)
 		return (-1);
