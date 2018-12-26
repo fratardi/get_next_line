@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/26 08:11:57 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/26 08:29:07 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*buffrest(char *str)
 
 int		get_next_line(const int fd, char **line)
 {
-	static void		*rst[OPEN_MAX + 1];
+	static void		*rst[OPEN_MAX];
 	char			buf[BUFF_SIZE + 1];
 	int				n;
 
