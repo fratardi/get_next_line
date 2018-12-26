@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/26 03:11:12 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/26 04:34:32 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ char	*buffrest(char *str)
 	return (rest);
 }
 
-#include <stdio.h>
-
 int		get_next_line(const int fd, char **line)
 {
 	static void		*rst;
@@ -93,8 +91,12 @@ int		get_next_line(const int fd, char **line)
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
 	*line = liner(rst);
-	if((rst = buffrest(rst))||*line)
+	if((rst = buffrest(rst)) || *line)
+	{	
+		if(!(**line) && !rst)
+			return(0);
 		return(1);
+	}
 	return(0);
 }
 
@@ -112,6 +114,20 @@ int		get_next_line(const int fd, char **line)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>
 
 
 //try 	
