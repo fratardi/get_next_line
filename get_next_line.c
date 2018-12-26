@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/26 05:43:03 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/26 05:54:22 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*liner(char *linetoclear)
 	ret = NULL;
 	i = 0;
 	if (!linetoclear)
-		return(NULL);
+		return (NULL);
 	while (linetoclear[i] != '\0' && linetoclear[i] != '\n')
 		i++;
 	if (!(ret = ft_strndup(linetoclear, i)))
@@ -63,8 +63,8 @@ char	*buffrest(char *str)
 	char	*rest;
 
 	rest = NULL;
-	if(!str)
-		return(rest);
+	if (!str)
+		return (rest);
 	if (!(ft_strchr(str, '\n') + 1))
 	{
 		free(str);
@@ -83,74 +83,19 @@ int		get_next_line(const int fd, char **line)
 	size_t			n;
 
 	ft_bzero(buf, BUFF_SIZE + 1);
-	if(fd <= 0)
-		return(-1);
+	if (fd <= 0)
+		return (-1);
 	while ((n = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
 		rst = strjoinfree(rst, buf);
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
 	*line = liner(rst);
-	if((rst = buffrest(rst)) || *line)
-	{	
-		if(!(**line) && !rst)
-			return(0);
-		return(1);
-	}
-	return(0);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#include <stdio.h>
-
-
-//try 	
-/*	if(n != 0)
-		return(-1);
-	*line = liner(rst);
-	rst = buffrest(rst);
-	if(rst)
-		return(1);
-	return(0);	*/
-
-//try
-
-/*		if(!(*line = liner(rst)))
-		{
-			line = NULL;
-			return(0);
-		}
-//	printf("line >>%p<<\tline : >>%s<<\n", line, *line);
 	if ((rst = buffrest(rst)) || *line)
+	{
+		if (!(**line) && !rst)
+			return (0);
 		return (1);
-//	write(1, "proute ca mere\n", 14);
-	free(rst);
-	rst = NULL;
+	}
 	return (0);
-}*/
+}
