@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/26 02:01:25 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/26 03:11:12 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*buffrest(char *str)
 		free(str);
 		return (rest);
 	}
-	if (ft_strchr(str, '\n') && (ft_strchr(str, '\n') + 1))
+	if (ft_strchr(str, '\n'))
 		rest = ft_strdup(ft_strchr(str, '\n') + 1);
 	free(str);
 	return (rest);
@@ -90,15 +90,42 @@ int		get_next_line(const int fd, char **line)
 	while ((n = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
 		rst = strjoinfree(rst, buf);
-		if (ft_strchr(rst, '\n'))
-		{
-			*line = liner(rst);
-			rst = buffrest(rst);
-			return (1);
-		}
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
-		if(!(*line = liner(rst)))
+	*line = liner(rst);
+	if((rst = buffrest(rst))||*line)
+		return(1);
+	return(0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//try 	
+/*	if(n != 0)
+		return(-1);
+	*line = liner(rst);
+	rst = buffrest(rst);
+	if(rst)
+		return(1);
+	return(0);	*/
+
+//try
+
+/*		if(!(*line = liner(rst)))
 		{
 			line = NULL;
 			return(0);
@@ -110,4 +137,4 @@ int		get_next_line(const int fd, char **line)
 	free(rst);
 	rst = NULL;
 	return (0);
-}
+}*/
