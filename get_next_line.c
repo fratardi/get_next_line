@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/21 09:23:49 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/26 02:01:25 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*liner(char *linetoclear)
 		i++;
 	if (!(ret = ft_strndup(linetoclear, i)))
 		return (NULL);
+	ret[i] = 0;
 	return (ret);
 }
 
@@ -97,26 +98,9 @@ int		get_next_line(const int fd, char **line)
 		}
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
-
-
-}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*		if(!(*line = liner(rst)))
+		if(!(*line = liner(rst)))
 		{
-			free(*line);
+			line = NULL;
 			return(0);
 		}
 //	printf("line >>%p<<\tline : >>%s<<\n", line, *line);
@@ -126,4 +110,4 @@ int		get_next_line(const int fd, char **line)
 	free(rst);
 	rst = NULL;
 	return (0);
-}*/
+}
