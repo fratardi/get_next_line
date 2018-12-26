@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/26 08:29:07 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/26 11:42:57 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int		get_next_line(const int fd, char **line)
 	char			buf[BUFF_SIZE + 1];
 	int				n;
 
-	if (fd < 0 || line == (void *)0)
+	if (fd < 0 || fd > OPEN_MAX || !line)
 		return (-1);
 	while ((n = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
@@ -95,7 +95,10 @@ int		get_next_line(const int fd, char **line)
 	if ((rst[fd] = buffrest(rst[fd])) || *line)
 	{
 		if (!(**line) && !rst[fd])
+		{
+			free(*line);
 			return (0);
+		}
 		return (1);
 	}
 	return ((n == 0) ? 0 : -1);
