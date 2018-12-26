@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 22:21:51 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/26 05:43:50 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/26 06:51:06 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int		main(int argc, char **argv)
 	line = 0;
 	if (!(ft_checkargs(argc)))
 		return (0);
-	fd = open(argv[1], O_RDONLY);
+	//fd = open(argv[1], O_RDONLY);
+	fd = 0;
 	while ((n = get_next_line(fd, &line) > 0))
 	{
 		ft_putnbr(++i);
@@ -31,16 +32,16 @@ int		main(int argc, char **argv)
 	//	ft_putnot r((int)n);
 //		ft_putstr("ret : ");
 //		ft_putnbr(n);
-//		ft_putstr("\n");
+		ft_putstr("  ");
 		ft_putendl(line);
 		free(line);
 		line = NULL;
 	}
-/*	ft_putstr(" 2 ret : ");
-	ft_putnbr(n);
-	ft_putendl("\n");
-	ft_putendl(line);
-*/
+/*	ft_putstr(" 2 ret : ");*/
+/*	ft_putnbr(n);
+	ft_putendl("\n");*/
+//	ft_putendl(line);
 	close(fd);
 	return (0);
+	(void)argv;
 }
