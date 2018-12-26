@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:08:49 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/26 07:33:17 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/26 08:16:51 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 # define BUFF_SIZE 5000
 
 int						get_next_line(const int fd, char **line);
