@@ -6,7 +6,7 @@
 /*   By: fratardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 18:14:27 by fratardi          #+#    #+#             */
-/*   Updated: 2018/12/26 04:40:02 by fratardi         ###   ########.fr       */
+/*   Updated: 2018/12/26 04:43:51 by fratardi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		get_next_line(const int fd, char **line)
 	size_t			n;
 
 	ft_bzero(buf, BUFF_SIZE + 1);
-	if(fd <= 0 || !*line )
+	if(fd <= 0)
 		return(-1);
 	while ((n = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
